@@ -10,5 +10,12 @@ datasource db {
 model Posts {
   id       Int     @id @default(autoincrement())
   title    String
-  body     String?
+  body     String
+}
+
+model Users {
+  id          Int     @id @default(autoincrement())
+  username    String
+  password    String
+  profilePic  String?
 }

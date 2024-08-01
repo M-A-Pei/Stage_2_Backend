@@ -1,11 +1,11 @@
 import express from "express"
 import dotenv from "dotenv"
-import route from "./src/routes/routes"
+import route from "./src/routes"
 import db from "./src/libs/db"
 
 const app = express()
 dotenv.config()
-app.use(express.urlencoded({extended : false}))
+app.use(express.urlencoded({extended : true}))
 
 app.use(route)
 

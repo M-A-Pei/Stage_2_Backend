@@ -1,27 +1,39 @@
-import baseService from "./baseService";
-import postModel from "../models/postModel";
+import db from "../libs/db"
+import { IPost } from "../types/post"
 
-export default class postService extends baseService<postModel>{
-    public posts: postModel[] = []
-    findAll(): postModel[] {
-        return this.posts
-    }
+export async function findAll(){
+    return await db.posts.findMany()
+}
 
-    findOne(id: number): postModel {
-        return this.posts[id]
-    }
+export async function findOne(id: number){
+    return await db.posts.findUnique({
+        where: {id}
+    })
+}
 
-    create(title: string, body: string): void {
-        this.posts.push({
-            title, body
-        })
-    }
+export async function addPost(post: IPost){
+    return await db.posts.create({
+        data: {
+            ...post
+        }
+    })
+}
 
-    update(id: number, title: string, body: string): void {
-        this.posts[id] = {title, body}
-    }
+export async function updatePost(post: IPost, id: number){
+    return await db.posts.update({
+        where: {
+            id: id
+        },
+        data: {
+            ...post
+        }
+    })
+}
 
-    delete(id: number): void {
-        
-    }
+export async function deletePost(id: number){
+    return await db.posts.delete({
+        where: {
+            id: id
+        }
+    })
 }

@@ -1,21 +1,27 @@
 import { Response, Request } from "express"
+import * as postService from "../services/postService"
 
-export function findAll(req: Request, res: Response){
-    res.send("find all posts")
+export async function findAll(req: Request, res: Response){
+    const x = await postService.findAll()
+    res.json(x)
 }
 
-export function findPost(req: Request, res: Response){
-    res.send("find post")
+export async function findPost(req: Request, res: Response){
+    const x = await postService.findOne(Number(req.params.id))
+    res.send(x)
 }
 
-export function addPost(req: Request, res: Response){
-    res.send("add post")
+export async function addPost(req: Request, res: Response){
+    const x = await postService.addPost(req.body)
+    res.send(x)
 }
 
-export function updatePost(req: Request, res: Response){
-    res.send("update post")
+export async function updatePost(req: Request, res: Response){
+    const x = await postService.updatePost(req.body, Number(req.params.id))
+    res.send(x)
 }
 
-export function deletePost(req: Request, res: Response){
-    res.send("delete post")
-}
+export async function deletePost(req: Request, res: Response){
+    const x = await postService.deletePost(Number(req.params.id)) 
+    res.send(x)
+} 

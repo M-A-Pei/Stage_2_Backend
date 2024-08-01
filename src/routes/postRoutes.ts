@@ -1,18 +1,12 @@
-import postController from "../controllers/postController";
-import BaseRoute from "./baseRoute";
+import { Router } from "express"
+import { findAll, findPost, addPost, updatePost, deletePost } from "../controllers/postController"
 
-export default class postRoutes extends BaseRoute{
+const postRoutes = Router()
 
-    protected PostController: postController
+postRoutes.get("/", findAll)
+postRoutes.get("/:id", findPost)
+postRoutes.post("/", addPost)
+postRoutes.put("/:id", updatePost)
+postRoutes.delete("/:id", deletePost)
 
-    constructor(){
-        super()
-        this.PostController = new postController()
-    }
-
-    protected initializeRoutes(): void {
-        console.log("initializing post routes...")
-        this.router.get('/posts/:id', this.PostController.findPost)
-        this.router.get('/posts', this.PostController.findAll)
-    }
-}
+export default postRoutes

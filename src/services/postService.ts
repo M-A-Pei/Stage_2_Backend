@@ -59,7 +59,7 @@ export async function updatePost(post: IPost, id: number){
 export async function deletePost(id: number){
     return await db.posts.delete({
         where: {
-            id: id
+            id
         }
     })
 }

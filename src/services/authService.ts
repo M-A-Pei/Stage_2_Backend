@@ -23,7 +23,6 @@ export async function login(username: string, password: string){
 
 export async function register(user: IUser) {
     const userExists = await findByUsername(user.username)
-    console.log(user.username)
 
     if(userExists != null){
         throw new Error("username already exists")

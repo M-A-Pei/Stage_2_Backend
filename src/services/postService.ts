@@ -2,19 +2,43 @@ import db from "../libs/db"
 import { IPost } from "../types/post"
 
 export async function findAll(){
-    return await db.posts.findMany()
+    return await db.posts.findMany({
+        where: {
+            parentId : null
+        },
+        include: {
+            author: {
+                select: {
+                    id: true,
+                    username: true,
+                }
+            },
+            comments: true
+        }
+    })
 }
 
 export async function findOne(id: number){
     return await db.posts.findUnique({
-        where: {id}
+        where: {id},
+        include: {
+            author: {
+                select: {
+                    id: true,
+                    username: true,
+                }
+            },
+            comments: true
+        }
     })
 }
 
 export async function addPost(post: IPost){
     return await db.posts.create({
         data: {
-            ...post
+            ...post,
+            userId: Number(post.userId),
+            parentId: Number(post.parentId)
         }
     })
 }

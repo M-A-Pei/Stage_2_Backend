@@ -8,14 +8,32 @@ datasource db {
 }
 
 model Posts {
-  id       Int     @id @default(autoincrement())
-  title    String
-  body     String
+  id          Int        @id @default(autoincrement())
+  title       String
+  body        String
+
+  parentId    Int?
+  parentPost  Posts?     @relation("PostReplies", fields: [parentId], references: [id])
+  comments    Posts[]    @relation("PostReplies")
+
+  userId      Int
+  author      Users      @relation(fields: [userId], references: [id])
+
+  images      PostImages[]
+}
+
+model PostImages {
+  id          Int        @id @default(autoincrement())
+  image       String
+  postId      Int
+  post        Posts      @relation(fields: [postId], references: [id])
 }
 
 model Users {
-  id          Int     @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   username    String
   password    String
   profilePic  String?
+
+  posts       Posts[]
 }

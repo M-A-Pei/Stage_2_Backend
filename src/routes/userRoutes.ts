@@ -1,11 +1,13 @@
-import { Router,  } from "express";
+import { Router } from "express";
+import { addUser, findAll, findById, findByUsername ,updateUser, deleteUser, } from "../controllers/userController";
 
 const userRoutes = Router()
 
-userRoutes.get("/", )
-userRoutes.get("/:id", )
-userRoutes.post("/", )
-userRoutes.put("/:id", )
-userRoutes.delete("/:id", )
+userRoutes.get("/", findAll)
+userRoutes.get("/byId/:id", findById)
+userRoutes.get("/byName/:username", findByUsername)
+userRoutes.post("/", addUser)
+userRoutes.put("/:id", updateUser)
+userRoutes.delete("/:id", deleteUser)
 
 export default userRoutes

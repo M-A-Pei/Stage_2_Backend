@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 import route from "./src/routes"
 import db from "./src/libs/db"
+import path from "path"
 
 const app = express()
 dotenv.config()

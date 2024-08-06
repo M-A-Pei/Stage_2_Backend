@@ -35,7 +35,7 @@ export async function updatePost(id: number, user: IUser){
             ...user
         },
         where: {
-            id: id
+            id
         }
     })
 }

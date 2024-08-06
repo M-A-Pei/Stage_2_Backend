@@ -37,8 +37,6 @@ export async function addPost(post: IPost){
     return await db.posts.create({
         data: {
             ...post,
-            userId: Number(post.userId),
-            parentId: Number(post.parentId)
         }
     })
 }

@@ -33,6 +33,8 @@ model Users {
   id          Int        @id @default(autoincrement())
   username    String
   password    String
+  email       String
+  description String
   profilePic  String?
 
   posts       Posts[]

@@ -37,6 +37,9 @@ export async function addPost(post: IPost){
     return await db.posts.create({
         data: {
             ...post,
+            images: {
+                create: post.images?.map((image)=>({image: image.filename}))
+            }
         }
     })
 }
@@ -44,10 +47,11 @@ export async function addPost(post: IPost){
 export async function updatePost(post: IPost, id: number){
     return await db.posts.update({
         where: {
-            id: id
+            id
         },
         data: {
-            ...post
+            title: post.title,
+            body: post.body,
         }
     })
 }

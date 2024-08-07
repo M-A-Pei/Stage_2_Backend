@@ -21,6 +21,21 @@ export async function findByUsername(username: string){
     })
 }
 
+export async function findByEmailOrName(string:string) {
+    return await db.users.findFirst({
+        where: {
+            OR: [
+                {
+                    username: string
+                },
+                {
+                    email: string
+                }
+            ]
+        }
+    })
+}
+
 export async function addUser(user: IUser){
     return await db.users.create({
         data: {

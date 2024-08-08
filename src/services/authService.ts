@@ -1,10 +1,11 @@
-import { addUser, findByUsername } from "./userService";
+import { addUser, findByEmailOrName, findByUsername } from "./userService";
 import { IUser } from "../types/user";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
 
-export async function login(username: string, password: string){
-    const userExists = await findByUsername(username)
+export async function login(usernameOrEmail: string, password: string){
+    const userExists = await findByEmailOrName(usernameOrEmail)
+    
     
     if(userExists == null){
         throw new Error("account doesnt exist")

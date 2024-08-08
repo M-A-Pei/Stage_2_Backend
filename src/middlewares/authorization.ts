@@ -9,7 +9,6 @@ export default async function authorization(req: Request, res: Response, next: N
      }
 
     const payload = jwt.verify(token, process.env.SECRET || "secret")
-
     
    if (!payload) {
     return res.status(401).json({ message: "Unauthorized" });

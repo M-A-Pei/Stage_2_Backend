@@ -13,7 +13,6 @@ export async function findPost(req: Request, res: Response){
 
 export async function addPost(req: Request, res: Response){
     req.body.userId = res.locals.user.id
-    req.body.parentId = Number(req.body.parentId)
 
     if(req.files){
         req.body.image = req.files

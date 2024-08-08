@@ -16,7 +16,15 @@ export async function findById(id: number){
 export async function findByUsername(username: string){
     return await db.users.findFirst({
         where: {
-            username: username
+            username
+        }
+    })
+}
+
+export async function findByEmail(email: string){
+    return await db.users.findFirst({
+        where: {
+            email
         }
     })
 }

@@ -11,6 +11,7 @@ export async function findAll(){
                 select: {
                     id: true,
                     username: true,
+                    profilePic: true
                 }
             },
             comments: true
@@ -26,6 +27,7 @@ export async function findOne(id: number){
                 select: {
                     id: true,
                     username: true,
+                    profilePic: true
                 }
             },
             comments: true

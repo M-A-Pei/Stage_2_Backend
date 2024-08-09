@@ -29,6 +29,7 @@ export async function getMyInfo(req: Request, res: Response){
     try{
         const user = res.locals.user
         res.status(200).json({
+            token: req.headers.authorization,
             username: user.username,
             email: user.email,
             description: user.description,

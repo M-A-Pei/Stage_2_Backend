@@ -25,6 +25,10 @@ export async function addUser(req: Request, res: Response){
 export async function updateUser(req: Request, res: Response){
     req.body.id = res.locals.user.id
 
+    if(req.files){
+        req.body.profilePic = req.files
+    }
+
     try {
         const x = await userService.update(req.body)
         res.json(x)

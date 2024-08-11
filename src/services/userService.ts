@@ -66,15 +66,30 @@ export async function update(user: IUser){
         throw new Error("password is wrong!")
     }
 
-    return await db.users.update({
-        data: {
-            username : user.username,
-            description: user.description,
-        },
-        where: {
-            id : user.id
-        }
-    })
+    if(user.profilePic){
+        return await db.users.update({
+            data: {
+                username : user.username,
+                description: user.description,
+                profilePic: user.profilePic
+            },
+            where: {
+                id : user.id
+            }
+        })
+    }else{
+        return await db.users.update({
+            data: {
+                username : user.username,
+                description: user.description
+            },
+            where: {
+                id : user.id
+            }
+        })
+    }
+
+    
 }
 
 export async function deleteUser(id: number){

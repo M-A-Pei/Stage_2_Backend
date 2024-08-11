@@ -1,5 +1,6 @@
 import db from "../libs/db"
 import { IUser } from "../types/user"
+import bcrypt from "bcrypt"
 
 export async function findAll(){
     return await db.users.findMany()
@@ -52,18 +53,31 @@ export async function addUser(user: IUser){
     })
 }
 
-export async function updatePost(id: number, user: IUser){
+export async function update(user: IUser){
+    const oldUser = await findByEmail(user.email)
+
+    if(oldUser == null){
+        throw new Error("this user doesnt exist")
+    }
+
+    const isMatch = await bcrypt.compare(user.password, oldUser.password)
+
+    if(!isMatch){
+        throw new Error("password is wrong!")
+    }
+
     return await db.users.update({
         data: {
-            ...user
+            username : user.username,
+            description: user.description,
         },
         where: {
-            id
+            id : user.id
         }
     })
 }
 
-export async function deletePost(id: number){
+export async function deleteUser(id: number){
     return await db.users.delete({
         where: {
             id: id

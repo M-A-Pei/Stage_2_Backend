@@ -1,5 +1,6 @@
 import { Response, Request } from "express"
 import * as userService from "../services/userService"
+import errorHandler from "../utils/errorHandler"
 
 export async function findAll(req: Request, res: Response){
     const x = await userService.findAll()
@@ -22,11 +23,18 @@ export async function addUser(req: Request, res: Response){
 }
 
 export async function updateUser(req: Request, res: Response){
-    const x = await userService.updatePost(Number(req.params.id), req.body)
-    res.json(x)
+    req.body.id = res.locals.user.id
+
+    try {
+        const x = await userService.update(req.body)
+        res.json(x)
+    } catch (error) {
+        errorHandler(res, error as unknown as Error)
+    }
+
 }
 
 export async function deleteUser(req: Request, res: Response){
-    const x = await userService.deletePost(Number(req.params.id))
+    const x = await userService.deleteUser(Number(req.params.id))
     res.json(x)
 } 

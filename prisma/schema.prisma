@@ -20,6 +20,8 @@ model Posts {
   author      Users      @relation(fields: [userId], references: [id])
 
   images      PostImages[]
+
+  Like        Like[]
 }
 
 model PostImages {
@@ -38,4 +40,14 @@ model Users {
   profilePic  String?
 
   posts       Posts[]
+  likes       Like[]
+}
+
+model Like {
+  postId      Int
+  userId      Int
+  post        Posts   @relation(fields: [postId], references: [id])
+  user        Users   @relation(fields: [userId], references: [id])
+
+  @@id([postId, userId])
 }

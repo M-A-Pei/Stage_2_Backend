@@ -1,8 +1,13 @@
-import * as replyController from "../services/replyService";
+import * as replyService from "../services/replyService";
 import { Request, Response } from "express";
 
-export async function findAll(req: Request, res: Response){
-    const x = await replyController.findAll(Number(req.params.postId))
+export async function findAllInPost(req: Request, res: Response){
+    const x = await replyService.findAllInPost(Number(req.params.postId))
+    res.json(x)
+}
+
+export async function findAllForUser(req: Request, res: Response){
+    const x = await replyService.findAllForUser(req.params.username)
     res.json(x)
 }
 
@@ -14,6 +19,6 @@ export async function create(req: Request, res: Response){
         req.body.image = req.files
     }
 
-    const x = await replyController.addReply(req.body)
+    const x = await replyService.addReply(req.body)
     res.json(x)
 }

@@ -12,8 +12,18 @@ export async function addReply(reply: IPost){
     })
 }
 
-export async function findAll(postId: number){
-    db.posts.findMany({
+export async function findAllInPost(postId: number){
+    return await db.posts.findMany({
         where: {parentId: postId}
+    })
+}
+
+export async function findAllForUser(username: string){
+    return await db.posts.findMany({
+        where: {
+            author: {
+                username
+            }
+        }
     })
 }

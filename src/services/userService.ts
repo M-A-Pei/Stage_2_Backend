@@ -10,6 +10,13 @@ export async function findById(id: number){
     return await db.users.findUnique({
         where: {
             id: id
+        },
+        select: {
+            username: true,
+            description: true,
+            email: true,
+            id: true,
+            profilePic: true
         }
     })
 }

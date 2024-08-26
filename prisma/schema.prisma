@@ -9,7 +9,6 @@ datasource db {
 
 model Posts {
   id          Int        @id @default(autoincrement())
-  title       String
   body        String
 
   parentId    Int?
@@ -41,6 +40,9 @@ model Users {
 
   posts       Posts[]
   likes       Like[]
+
+  followers   Users[]  @relation("userFollows")
+  following   Users[]  @relation("userFollows")
 }
 
 model Like {

@@ -3,16 +3,16 @@ import postRoutes from "./postRoutes";
 import userRoutes from "./userRoutes";
 import replyRoutes from "./replyRoutes";
 import likeRoutes from "./LikeRoutes";
-import {Router} from "express"
+import followRoutes from "./followRoutes";
+import { Router } from "express";
 
+const route = Router();
 
-const route = Router()
+route.use("/posts", postRoutes);
+route.use("/users", userRoutes);
+route.use("/auth", authRoutes);
+route.use("/reply", replyRoutes);
+route.use("/like", likeRoutes);
+route.use("/follow", followRoutes);
 
-route.use("/posts", postRoutes)
-route.use("/users", userRoutes)
-route.use("/auth", authRoutes)
-route.use("/reply", replyRoutes)
-route.use("/like", likeRoutes)
-
-export default route
-
+export default route;

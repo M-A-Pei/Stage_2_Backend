@@ -28,15 +28,35 @@ export async function addUser(req: Request, res: Response) {
 }
 
 export async function updateUser(req: Request, res: Response) {
-  req.body.id = res.locals.user.id;
-  console.log(req.file)
-  if (req.file) {
-    req.body.profilePic = req.file.filename;
-   
-  }
-
+ 
   try {
     const x = await userService.update(req.body);
+    console.log(req.body)
+    res.json(x);
+  } catch (error) {
+    errorHandler(res, error as unknown as Error);
+  }
+}
+
+export async function updateAvatar(req: Request, res: Response) {
+  
+  try {
+    if(req.file){
+        req.body.profilePic =  req.file?.filename
+    }
+    const x = await userService.updateAvatar(res.locals.user.id, req.body.profilePic);
+    res.json(x);
+  } catch (error) {
+    errorHandler(res, error as unknown as Error);
+  }
+}
+
+export async function updateBanner(req: Request, res: Response) {
+  try {
+    if(req.file){
+        req.body.banner =  req.file?.filename
+    }
+    const x = await userService.updateBanner(res.locals.user.id, req.body.banner);
     res.json(x);
   } catch (error) {
     errorHandler(res, error as unknown as Error);

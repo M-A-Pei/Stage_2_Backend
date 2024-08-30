@@ -6,6 +6,8 @@ import {
   updateUser,
   deleteUser,
   findBySearch,
+  updateAvatar,
+  updateBanner
 } from "../controllers/userController";
 import authorization from "../middlewares/authorization";
 import upload from "../middlewares/fileUpload";
@@ -16,7 +18,9 @@ userRoutes.get("/", findAll);
 userRoutes.get("/byId/:id", findById);
 userRoutes.get("/byName/:username", findByUsername);
 userRoutes.get("/bySearch/:username", findBySearch);
-userRoutes.patch("/", authorization, upload.single("image"), updateUser);
+userRoutes.patch("/", authorization, updateUser);
+userRoutes.patch("/editAvatar", authorization, upload.single("avatar"), updateAvatar);
+userRoutes.patch("/editBanner", authorization, upload.single("banner"), updateBanner);
 userRoutes.delete("/:id", deleteUser);
 
 export default userRoutes;

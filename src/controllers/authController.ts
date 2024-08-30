@@ -28,12 +28,14 @@ export async function register(req: Request, res: Response){
 export async function getMyInfo(req: Request, res: Response){
     try{
         const user = res.locals.user
+        console.log(user)
         res.status(200).json({
             token: req.headers.authorization,
             username: user.username,
             email: user.email,
             description: user.description,
-            profilePic: user.profilePic
+            profilePic: user.profilePic,
+            bannerPic: user.bannerPic
         })
     }catch(error){
         errorHandler(res, error as unknown as Error)

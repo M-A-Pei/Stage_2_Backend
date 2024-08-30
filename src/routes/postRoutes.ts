@@ -7,7 +7,7 @@ const postRoutes = Router()
 
 postRoutes.get("/", findAll)
 postRoutes.get("/:id", findPost)
-postRoutes.post("/", authorization, upload.array("image"),addPost)
+postRoutes.post("/", authorization, upload.array("images", 4),addPost)
 postRoutes.put("/:id", updatePost)
 postRoutes.delete("/:id", deletePost)
 

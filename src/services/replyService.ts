@@ -6,7 +6,7 @@ export async function addReply(reply: IPost) {
     data: {
       ...reply,
       images: {
-        create: reply.images?.map((image) => ({ image: image.filename })),
+        create: reply.images,
       },
     },
   });
@@ -23,6 +23,18 @@ export async function findAllInPost(postId: number) {
           profilePic: true,
         },
       },
+      images: true,
+      comments: {
+        include: {
+          author: {
+            select: {
+              id: true,
+              username: true,
+              profilePic: true,
+            },
+          },
+        },
+      },
     },
   });
 }
@@ -34,5 +46,8 @@ export async function findAllForUser(username: string) {
         username,
       },
     },
+    include: {
+      images: true
+    }
   });
 }

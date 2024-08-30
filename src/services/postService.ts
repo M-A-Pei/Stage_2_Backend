@@ -15,6 +15,7 @@ export async function findAll() {
         },
       },
       comments: true,
+      images: true,
     },
   });
 }
@@ -31,6 +32,7 @@ export async function findOne(id: number) {
         },
       },
       comments: true,
+      images: true,
     },
   });
 }
@@ -40,8 +42,8 @@ export async function addPost(post: IPost) {
     data: {
       ...post,
       images: {
-        create: post.images?.map((image) => ({ image: image.filename })),
-      },
+        create: post.images
+      }
     },
   });
 }

@@ -32,11 +32,12 @@ model PostImages {
 
 model Users {
   id          Int        @id @default(autoincrement())
-  username    String
-  password    String
-  email       String
+  username    String     @unique
+  password    String     
+  email       String     @unique
   description String
   profilePic  String?
+  bannerPic   String?
 
   posts       Posts[]
   likes       Like[]

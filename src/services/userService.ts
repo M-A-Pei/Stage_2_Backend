@@ -11,13 +11,13 @@ export async function findById(id: number) {
     where: {
       id: id,
     },
-    select: {
-      username: true,
-      description: true,
-      email: true,
-      id: true,
-      profilePic: true,
-    },
+    include: {
+      posts: {
+        include: {
+          images: true,
+        }
+      }
+    }
   });
 }
 
@@ -84,29 +84,37 @@ export async function update(user: IUser) {
     throw new Error("password is wrong!");
   }
 
-  console.log(user.profilePic);
-  if (user.profilePic) {
-    return await db.users.update({
-      data: {
-        username: user.username,
-        description: user.description,
-        profilePic: user.profilePic,
-      },
-      where: {
-        id: user.id,
-      },
-    });
-  } else {
-    return await db.users.update({
-      data: {
-        username: user.username,
-        description: user.description,
-      },
-      where: {
-        id: user.id,
-      },
-    });
-  }
+  return await db.users.update({
+    data: {
+      username: user.username,
+      description: user.description,
+    },
+    where: {
+      email: user.email,
+    },
+  });
+}
+
+export async function updateAvatar(userId: number, profilePic: string) {
+  return await db.users.update({
+    where: {
+      id: userId
+    },
+    data: {
+      profilePic: profilePic
+    }
+  })
+}
+
+export async function updateBanner(userId: number, banner: string) {
+  return await db.users.update({
+    where: {
+      id: userId
+    },
+    data: {
+      bannerPic: banner
+    }
+  })
 }
 
 export async function deleteUser(id: number) {

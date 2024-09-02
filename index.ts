@@ -3,7 +3,6 @@ import dotenv from "dotenv"
 import route from "./src/routes"
 import db from "./src/libs/db"
 import cors from "cors"
-import upload from "./src/middlewares/fileUpload"
 import path from "path"
 
 const app = express()

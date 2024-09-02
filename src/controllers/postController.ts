@@ -16,12 +16,10 @@ export async function findPost(req: Request, res: Response) {
 export async function addPost(req: Request, res: Response) {
     req.body.userId = res.locals.user.id
 
-    console.log(req.files)
-    if (req.files) {
-        // req.body.images = Array.from(req.files)
+    console.log(res.locals.images)
+    if (res.locals.images) {
         req.body.images = (req.files as TFiles)?.map((image: Express.Multer.File) => ({ image: image.filename }))
     }
-    console.log(req.body.images);
 
     const x = await postService.addPost(req.body)
     res.json(x)

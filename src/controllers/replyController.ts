@@ -1,22 +1,22 @@
 import * as replyService from "../services/replyService";
 import { Request, Response } from "express";
 
-export async function findAllInPost(req: Request, res: Response){
+export async function findAllInPost(req: Request, res: Response) {
     const x = await replyService.findAllInPost(Number(req.params.postId))
     res.json(x)
 }
 
-export async function findAllForUser(req: Request, res: Response){
+export async function findAllForUser(req: Request, res: Response) {
     const x = await replyService.findAllForUser(req.params.username)
     res.json(x)
 }
 
-export async function create(req: Request, res: Response){
+export async function create(req: Request, res: Response) {
     req.body.parentId = Number(req.params.postId)
     req.body.userId = res.locals.user.id
 
-    if(req.files){
-        req.body.image = req.files
+    if (res.locals.images) {
+        req.body.image = res.locals.images
     }
 
     const x = await replyService.addReply(req.body)

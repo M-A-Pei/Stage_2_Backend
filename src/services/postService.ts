@@ -38,11 +38,12 @@ export async function findOne(id: number) {
 }
 
 export async function addPost(post: IPost) {
+  console.log(post)
   return await db.posts.create({
     data: {
       ...post,
       images: {
-        create: post.images
+        create: post.images?.map(img => ({ image: String(img) }))
       }
     },
   });

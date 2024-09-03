@@ -20,10 +20,9 @@ export const uploadCloudinary = async (
     res: Response,
     next: NextFunction
 ) => {
-    console.log("uploading");
-
     const file: CloudinaryFile = req.file as CloudinaryFile;
     const files: CloudinaryFile[] = req.files as CloudinaryFile[];
+
     if (!file && !files) {
         // return next()
         return res.send("No file uploaded");
@@ -41,6 +40,7 @@ const uploadMultiple = async (
     res: Response,
     next: NextFunction
 ) => {
+    console.log("uploading multiple");
     try {
         const cloudinaryUrls: string[] = [];
         for (const file of files) {
@@ -63,6 +63,7 @@ const uploadMultiple = async (
                             new Error("Cloudinary upload result is undefined")
                         );
                     }
+                    console.log("f");
                     cloudinaryUrls.push(result.secure_url);
 
                     if (cloudinaryUrls.length === files.length) {
@@ -75,6 +76,7 @@ const uploadMultiple = async (
             uploadStream.end(file.buffer);
         }
     } catch (error) {
+        console.log("e");
         console.error("Error in uploadToCloudinary middleware:", error);
         next(error);
     }

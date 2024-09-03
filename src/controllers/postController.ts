@@ -1,8 +1,6 @@
 import { Response, Request } from "express"
 import * as postService from "../services/postService"
 
-type TFiles = Express.Multer.File[]
-
 export async function findAll(req: Request, res: Response) {
     const x = await postService.findAll()
     res.json(x)
@@ -18,7 +16,7 @@ export async function addPost(req: Request, res: Response) {
 
     console.log(res.locals.images)
     if (res.locals.images) {
-        req.body.images = (res.locals.images as TFiles)?.map((image: Express.Multer.File) => ({ image: image.filename }))
+        req.body.images = res.locals.images
     }
 
     const x = await postService.addPost(req.body)

@@ -7,7 +7,7 @@ import { uploadCloudinary } from "../middlewares/cloudinary";
 const replyRoutes = Router()
 
 replyRoutes.get("/:postId", findAllInPost) //get all replies to a post
-replyRoutes.get("/user/:username", findAllForUser) //get all replies to a post
+replyRoutes.get("/user/:username", findAllForUser) //get all replies to a user
 replyRoutes.post("/:postId", authorization, upload.array("image", 4), uploadCloudinary, create) //make a new reply to a post
 
 export default replyRoutes

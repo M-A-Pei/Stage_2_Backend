@@ -18,7 +18,7 @@ export async function addPost(req: Request, res: Response) {
 
     console.log(res.locals.images)
     if (res.locals.images) {
-        req.body.images = (req.files as TFiles)?.map((image: Express.Multer.File) => ({ image: image.filename }))
+        req.body.images = (res.locals.images as TFiles)?.map((image: Express.Multer.File) => ({ image: image.filename }))
     }
 
     const x = await postService.addPost(req.body)

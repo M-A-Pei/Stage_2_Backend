@@ -43,7 +43,7 @@ export async function addPost(post: IPost) {
     data: {
       ...post,
       images: {
-        create: post.images?.map(img => ({ image: String(img) }))
+        create: post.images ? post.images?.map(img => ({ image: String(img) })) : []
       }
     },
   });

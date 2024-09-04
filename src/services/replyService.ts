@@ -2,11 +2,11 @@ import db from "../libs/db";
 import { IPost } from "../types/post";
 
 export async function addReply(reply: IPost) {
-  await db.posts.create({
+  return await db.posts.create({
     data: {
       ...reply,
       images: {
-        create: reply.images,
+        create: [],
       },
     },
   });

@@ -15,10 +15,6 @@ export async function create(req: Request, res: Response) {
     req.body.parentId = Number(req.params.postId)
     req.body.userId = res.locals.user.id
 
-    if (res.locals.images) {
-        req.body.image = res.locals.images
-    }
-
     const x = await replyService.addReply(req.body)
     res.json(x)
 }

@@ -41,8 +41,8 @@ export async function updateUser(req: Request, res: Response) {
 export async function updateAvatar(req: Request, res: Response) {
 
   try {
-    if (res.locals.image) {
-      req.body.profilePic = res.locals.image?.filename
+    if (res.locals.avatar) {
+      req.body.profilePic = res.locals.avatar?.filename
     }
     const x = await userService.updateAvatar(res.locals.user.id, req.body.profilePic);
     res.json(x);
@@ -53,8 +53,8 @@ export async function updateAvatar(req: Request, res: Response) {
 
 export async function updateBanner(req: Request, res: Response) {
   try {
-    if (res.locals.image) {
-      req.body.banner = res.locals.image?.filename
+    if (res.locals.banner) {
+      req.body.banner = res.locals.banner?.filename
     }
     const x = await userService.updateBanner(res.locals.user.id, req.body.banner);
     res.json(x);

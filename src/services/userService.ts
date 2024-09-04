@@ -101,7 +101,7 @@ export async function updateAvatar(userId: number, profilePic: string) {
       id: userId
     },
     data: {
-      profilePic: profilePic
+      profilePic
     }
   })
 }

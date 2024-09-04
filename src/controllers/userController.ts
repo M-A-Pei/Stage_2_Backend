@@ -31,7 +31,6 @@ export async function updateUser(req: Request, res: Response) {
 
   try {
     const x = await userService.update(req.body);
-    console.log(req.body)
     res.json(x);
   } catch (error) {
     errorHandler(res, error as unknown as Error);
@@ -41,8 +40,8 @@ export async function updateUser(req: Request, res: Response) {
 export async function updateAvatar(req: Request, res: Response) {
 
   try {
-    if (res.locals.avatar) {
-      req.body.profilePic = res.locals.avatar?.filename
+    if (res.locals.image) {
+      req.body.profilePic = res.locals.image
     }
     const x = await userService.updateAvatar(res.locals.user.id, req.body.profilePic);
     res.json(x);
@@ -53,8 +52,8 @@ export async function updateAvatar(req: Request, res: Response) {
 
 export async function updateBanner(req: Request, res: Response) {
   try {
-    if (res.locals.banner) {
-      req.body.banner = res.locals.banner?.filename
+    if (res.locals.image) {
+      req.body.banner = res.locals.image
     }
     const x = await userService.updateBanner(res.locals.user.id, req.body.banner);
     res.json(x);
